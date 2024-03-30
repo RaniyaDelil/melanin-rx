@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import '../app/globals.css';
+import './globals.css';
 
 
-function AboutPage() {
+export default function Home() {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Navbar */}
@@ -15,7 +15,7 @@ function AboutPage() {
             <div className="flex-shrink-0 flex items-center">
               <a href="/" className="flex items-center">
                 {/* <Image
-                  src="../logo.svg"
+                  src="/logo.svg"
                   alt="MelaninRx Logo"
                   width={40}
                   height={40}
@@ -44,12 +44,18 @@ function AboutPage() {
       {/* Main content */}
       <main className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center">
-          {/* Header */}
-          <h1 className="text-4xl font-bold">About the Issue</h1>
+          {/* Logo and title */}
+          <Image
+            src="/logo.svg"
+            alt="MelaninRx Logo"
+            width={200}
+            height={200}
+            className="mx-auto"
+          />
+          <h1 className="mt-8 text-4xl font-bold">MelaninRx</h1>
+          <p className="mt-4 text-xl">Empowering Black voices for better medical choices.</p>
         </div>
       </main>
     </div>
   );
 }
-
-export default AboutPage;

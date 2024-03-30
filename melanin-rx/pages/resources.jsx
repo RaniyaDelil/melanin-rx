@@ -4,7 +4,7 @@ import Link from "next/link";
 import '../app/globals.css';
 
 
-function AboutPage() {
+function Resources() {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Navbar */}
@@ -45,11 +45,11 @@ function AboutPage() {
       <main className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center">
           {/* Header */}
-          <h1 className="text-4xl font-bold">About the Issue</h1>
+          <h1 className="text-4xl font-bold">Resources</h1>
         </div>
       </main>
     </div>
   );
 }
 
-export default AboutPage;
+export default Resources;
