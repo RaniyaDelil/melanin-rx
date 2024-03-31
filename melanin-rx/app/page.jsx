@@ -2,6 +2,7 @@ import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import './globals.css';
+import logo from './img/removebg.png';
 
 
 export default function Home() {
@@ -33,7 +34,7 @@ export default function Home() {
                   About the Issue
                 </a>
                 <a href="/resources" className="text-white hover:bg-gray-700 px-3 py-2 mt-3 rounded-md text-sm font-medium">
-                  Resources
+                  Health Analyst
                 </a>
               </div>
             </div>
@@ -46,10 +47,10 @@ export default function Home() {
         <div className="text-center">
           {/* Logo and title */}
           <Image
-            src="/logo.svg"
+            src={logo}
             alt="MelaninRx Logo"
-            width={200}
-            height={200}
+            width={350}
+            height={350}
             className="mx-auto"
           />
           <h1 className="mt-8 text-4xl font-bold">MelaninRx</h1>
