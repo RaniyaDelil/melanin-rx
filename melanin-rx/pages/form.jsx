@@ -1,8 +1,41 @@
 import React from 'react';
 import './form.css';
+import { useState } from 'react';
 
 function ReproductiveHealthInsightsForm() {
-  return (
+    const [formData, setFormData] = useState({
+        race: '',
+        bmi: '',
+        smoking: '',
+        prenatal: ''
+      });
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const response = await fetch('/search', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+          if (response.ok) {
+            const data = await response.json();
+            // Handle the response data (e.g., display results)
+          } else {
+            console.error('Failed to fetch data');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+    
+      const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
+
+    return (
     <div className="form-container">
       <h1>Reproductive Health Insights</h1>
       <form action="/search" method="post" className="form">
