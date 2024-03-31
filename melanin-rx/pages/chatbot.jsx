@@ -80,30 +80,34 @@ function Chatbot() {
       </nav>
       
       {/* Main content */}
-      <main className="max-w-7xl mx-auto px-4 py-16">
-        <div className="text-center">
+      <main className="flex-grow p-8">
+        <div className="text-center mb-4">
           {/* Header */}
           <h1 className="text-4xl font-bold">ChatBot</h1>
 
           {/* Chat Window */}
-          <div className="chat-window">
+          <div className="chat-window flex flex-col space-y-4">
             {messages.map((message, index) => (
               <div key={index} className={`message ${message.sender}`}>
-                {`${message.sender}: ${message.text}`}
+                <span className="text-gray-400">{message.sender}</span>: {message.text}
               </div>
             ))}
           </div>
           
           {/* Input box */}
+        <form onSubmit={sendMessage} className="flex justify-center mt-4">
           <input
             type="text"
             value={input}
             onChange={handleInputChange}
-            //onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+            className="p-2 border border-gray-400 rounded-md mr-2 focus:outline-none"
             placeholder="Type a message..."
             style={{ color: 'black' }}
           />
-          <button onClick={sendMessage}>Send</button>
+          <button type="submit" className="bg-brown text-white px-4 py-2 rounded-md hover:bg-brown-dark focus:outline-none">
+            Send
+          </button>
+        </form>
           
         </div>
       </main>

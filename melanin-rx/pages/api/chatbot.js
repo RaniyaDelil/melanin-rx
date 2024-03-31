@@ -7,8 +7,7 @@ import cors from 'cors';
 
 config();
 
-//const PORT = process.env.PORT || 3001;
-const PORT = 3003;
+//const PORT = process.env.PORT || 3005;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 // create instance of openAIApi
@@ -18,8 +17,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));
+//app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));
 
+// takes text and gets response using openai
 async function sendTextToOpenAI(text) {
     try {
         const response = await openai.chat.completions.create({
@@ -33,10 +33,10 @@ async function sendTextToOpenAI(text) {
     }
 }
 
+// default function, takes request and returns response
 export default async function handler(req, res) {
     try {
         const response = await sendTextToOpenAI(req.body.text);
-        console.log(response);
         res.json({ reply: response });
     } catch (err) {
         console.error(err);
