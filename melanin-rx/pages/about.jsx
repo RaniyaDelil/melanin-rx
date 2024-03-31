@@ -52,7 +52,10 @@ function AboutPage() {
                   About the Issue
                 </a>
                 <a href="/resources" className="text-white hover:bg-gray-700 px-3 py-2 mt-3 rounded-md text-sm font-medium">
-                    Health Analyst
+                  Health Analyst
+                </a>
+                <a href="/sources" className="text-white hover:bg-gray-700 px-3 py-2 mt-3 rounded-md text-sm font-medium">
+                  Sources
                 </a>
               </div>
             </div>
@@ -126,7 +129,8 @@ function AboutPage() {
       <img src="Figure_1.png" alt="Word Bubble" style={{ maxWidth: '100%', height: 'auto' }} />
     </div>
     <p style={{ fontSize: '1.125rem', lineHeight: '1.75rem', color: 'white', textAlign: 'center'}}>
-      Word Bubble presenting the most common information relating to Black womens' medical history in regards to pregnancy. We parsed through 15 research papers on the topic to find relevant information and accurate data on the subject. 
+      Word Bubble presenting the most common information relating to Black womens' medical history in regards to pregnancy. We parsed through 15 research papers
+      on the topic to find relevant information and accurate data on the subject. 
     </p>
   </div>
 </main>
