@@ -31,3 +31,11 @@ body {
     text-wrap: balance;
   }
 }
+
+.bg-brown {
+  background-color: #50312A;
+}
+
+.bg-brown:hover {
+  background-color: #280004;
+}
