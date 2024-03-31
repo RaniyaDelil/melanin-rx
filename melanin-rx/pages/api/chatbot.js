@@ -1,36 +1,45 @@
 // pages/api/chatbot.js
 // communicates with the OpenAI API for generating responses
+import { OpenAI } from 'openai';
+import { config } from 'dotenv';
+import express from 'express';
+import cors from 'cors';
 
-import OpenAI from 'openai';
-const OPENAI_API_KEY = "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";
+config();
 
-// Initialize OpenAI API client
-const openai = new OpenAI(process.env.OPENAI_API_KEY);
+//const PORT = process.env.PORT || 3001;
+const PORT = 3003;
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+
+// create instance of openAIApi
+const openai = new OpenAI(OPENAI_API_KEY);
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));
+
+async function sendTextToOpenAI(text) {
+    try {
+        const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo-0613",
+            messages: [{ role: "user", content: text}],
+        });
+        return response.choices[0].message.content || " ";
+    } catch (error) {
+        console.log(error.message);
+        throw error;
+    }
+}
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { message } = req.body;
-    console.log("User message:", message);
-
     try {
-      // Send user message to OpenAI API
-      const response = await openai.complete({
-        engine: 'text-davinci-003',
-        prompt: message,
-        maxTokens: 150,
-      });
-
-      // Extract the generated response
-      const answer = response.data.choices[0].text.trim();
-      console.log("Chatbot response:", answer);
-
-      // Send response back to client
-      res.status(200).json({ answer });
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+        const response = await sendTextToOpenAI(req.body.text);
+        console.log(response);
+        res.json({ reply: response });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Error connecting to OpenAI.' });
     }
-  } else {
-    res.status(405).end(); // Method Not Allowed
-  }
-}
+};

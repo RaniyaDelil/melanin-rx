@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import '../app/globals.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 function Chatbot() {
   // use state for messages and input
@@ -10,8 +11,10 @@ function Chatbot() {
   const [input, setInput] = useState('');
 
   // send message
-  const sendMessage = async () => {
-    setMessages([...messages, { text: input, sender: 'user' }]);
+  const sendMessage = async (e) => {
+    e.preventDefault();
+
+    setMessages((currentMessages) => [...currentMessages, { text: input, sender: 'user' }]);
     console.log(input);
     console.log(messages);
 
@@ -21,13 +24,13 @@ function Chatbot() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message: input }),
+      body: JSON.stringify({text: input}),
     });
 
     // updates usestate with message input
     if (response.ok) {
-      const { answer } = await response.json();
-      setMessages([...messages, { text: answer, sender: 'bot' }]);
+      const { reply } = await response.json();
+      setMessages((currentMessages) => [...currentMessages, { text: reply, sender: 'bot' }]);    
     } else {
       console.error('Error:', response.statusText);
     }
@@ -96,14 +99,12 @@ function Chatbot() {
             type="text"
             value={input}
             onChange={handleInputChange}
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+            //onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
             placeholder="Type a message..."
             style={{ color: 'black' }}
           />
           <button onClick={sendMessage}>Send</button>
           
-          {/* Display the question */}
-          {input && <div className="question">{input}</div>}
         </div>
       </main>
     </div>
