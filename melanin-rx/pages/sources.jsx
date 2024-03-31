@@ -1,3 +1,9 @@
+import Image from "next/image";
+import Link from "next/link";
+import '../app/globals.css';
+import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
+
 function Sources() {
     return (
         <div className="bg-gray-900 text-white min-h-screen">
